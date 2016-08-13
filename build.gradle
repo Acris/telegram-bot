@@ -26,14 +26,16 @@ targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven { url "https://jitpack.io" }
 }
 
 
 dependencies {
+	compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+	compile 'com.github.rubenlagus:TelegramBots:v2.3.4'
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile 'org.springframework.boot:spring-boot-starter-web'
-	compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
 	runtime 'org.apache.commons:commons-dbcp2:2.1.1'
 	runtime 'mysql:mysql-connector-java'
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
