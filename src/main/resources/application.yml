@@ -1,0 +1,67 @@
+# ===================================================================
+# Water God Bot Configurations
+#
+# Created by Acris Liu
+# ===================================================================
+
+
+spring:
+  # DATASOURCE
+  datasource:
+    url: jdbc:mysql://localhost:3306/database
+    username: username
+    password: password
+    driver-class-name: com.mysql.jdbc.Driver
+
+    type: org.apache.commons.dbcp2.BasicDataSource
+    max-active: 100
+    initial-size: 10
+    max-idle: 20
+    min-idle: 10
+    maximum-pool-size: 50
+    max-wait: 2000
+    remove-abandoned: true
+    remove-abandoned-timeout: 60
+    test-on-borrow: true
+    test-while-idle: true
+    validation-query: SELECT 1
+
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  # THYMELEAF
+  thymeleaf:
+    cache: false
+
+# MULTIPART
+multipart:
+  enabled: true
+  max-file-size: 20MB
+  max-request-size: 20MB
+
+# EMBEDDED SERVER CONFIGURATION (ServerProperties)
+server:
+  address: 127.0.0.1
+  port: 8085
+
+# LOGGING
+logging:
+  level:
+    org.springframework.web: debug
+    org.hibernate: error
+    com.reorz: info
+
+
+# ----------------------------------------
+# APP PROPERTIES
+# ----------------------------------------
+
+
+app:
+  bot:
+    username:
+    token:
+  api:
+    key:
