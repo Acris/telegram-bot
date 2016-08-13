@@ -41,6 +41,9 @@ dependencies {
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
+springBoot {
+	executable = true
+}
 
 eclipse {
 	classpath {
