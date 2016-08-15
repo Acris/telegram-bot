@@ -13,7 +13,6 @@ spring:
     password: password
     driver-class-name: com.mysql.jdbc.Driver
 
-    type: org.apache.commons.dbcp2.BasicDataSource
     max-active: 100
     initial-size: 10
     max-idle: 20
