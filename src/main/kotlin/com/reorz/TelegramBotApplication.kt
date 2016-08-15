@@ -4,6 +4,7 @@ import com.reorz.handler.MessageHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.scheduling.annotation.EnableScheduling
 import org.telegram.telegrambots.TelegramApiException
 import org.telegram.telegrambots.TelegramBotsApi
 import org.telegram.telegrambots.logging.BotLogger
@@ -12,6 +13,7 @@ import javax.annotation.PostConstruct
 import javax.annotation.PreDestroy
 
 @SpringBootApplication
+@EnableScheduling
 open class TelegramBotApplication {
     @Autowired lateinit var messageHandler: MessageHandler
     var botSession: BotSession? = null
