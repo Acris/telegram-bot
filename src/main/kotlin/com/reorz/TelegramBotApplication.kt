@@ -1,9 +1,11 @@
 package com.reorz
 
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.reorz.handler.MessageHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.context.annotation.Bean
 import org.springframework.scheduling.annotation.EnableScheduling
 import org.telegram.telegrambots.TelegramApiException
 import org.telegram.telegrambots.TelegramBotsApi
@@ -42,4 +44,7 @@ open class TelegramBotApplication {
         botSession?.close()
         BotLogger.info(LOGTAG, "Telegram bot ${messageHandler.botUsername} stopped")
     }
+
+    @Bean
+    open fun kotlinModule() = KotlinModule()
 }
