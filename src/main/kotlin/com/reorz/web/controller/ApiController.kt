@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class ApiController {
     companion object {
-        val LOGTAG: String? = ApiController::class.java.name
+        val LOGTAG: String = ApiController::class.java.name
     }
 }

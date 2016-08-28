@@ -10,7 +10,7 @@ import java.time.Clock
 @Component
 class ScheduledTask {
     companion object {
-        val LOGTAG: String? = ScheduledTask::class.java.name
+        val LOGTAG: String = ScheduledTask::class.java.name
     }
 
     @Scheduled(cron = "0 * * * * *")

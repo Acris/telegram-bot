@@ -10,7 +10,7 @@ import org.telegram.telegrambots.logging.BotLogger
 @Controller
 class HomeController {
     companion object {
-        val LOGTAG: String? = HomeController::class.java.name
+        val LOGTAG: String = HomeController::class.java.name
     }
 
     /**
