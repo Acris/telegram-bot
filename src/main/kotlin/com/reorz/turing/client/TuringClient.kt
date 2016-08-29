@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate
 class TuringClient {
     @Autowired lateinit var restTemplate: RestTemplate
     val mapper = jacksonObjectMapper()
-    val tulingApi = "http://www.tuling123.com/openapi/api"
+    val turingApi = "http://www.tuling123.com/openapi/api"
 
     @Bean
     fun restTemplate(builder: RestTemplateBuilder): RestTemplate {
@@ -25,7 +25,7 @@ class TuringClient {
 
     fun chat(key: String, info: String, userid: String, loc: String?): Response? {
         var request = Request(key, info, userid, loc)
-        val responseStr = restTemplate.postForObject(tulingApi, request, String::class.java)
+        val responseStr = restTemplate.postForObject(turingApi, request, String::class.java)
         val response = mapper.readValue(responseStr, Response::class.java)
         return response
     }
