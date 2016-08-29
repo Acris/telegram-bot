@@ -1,8 +1,8 @@
-package com.reorz.tuling.client
+package com.reorz.turing.client
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.reorz.tuling.entity.Request
-import com.reorz.tuling.entity.Response
+import com.reorz.turing.entity.Request
+import com.reorz.turing.entity.Response
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean
@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate
  * Created by acris on 2016/8/28.
  */
 @Component
-class TulingClient {
+class TuringClient {
     @Autowired lateinit var restTemplate: RestTemplate
     val mapper = jacksonObjectMapper()
     val tulingApi = "http://www.tuling123.com/openapi/api"

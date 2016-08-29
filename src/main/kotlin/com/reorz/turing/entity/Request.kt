@@ -1,4 +1,4 @@
-package com.reorz.tuling.entity
+package com.reorz.turing.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
