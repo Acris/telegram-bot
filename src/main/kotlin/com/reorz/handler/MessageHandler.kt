@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component
 import org.telegram.telegrambots.TelegramApiException
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
+import org.telegram.telegrambots.api.objects.MessageEntity
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.logging.BotLogger
@@ -81,21 +82,15 @@ class MessageHandler : TelegramLongPollingBot() {
                         }
                     }
                     else -> {
+                        val key = environment.getProperty("app.turing.key")
+                        val info = message.text
+                        val userid = botUsername
+                        val loc: String? = null
+                        val response = turingClient.chat(key, info, userid, loc)
+
                         val sm = SendMessage()
                         sm.chatId = message.chatId.toString()
-
-                        val entities = message.entities
-                        when {
-                            // use turing api if message don't have entities
-                            entities.isEmpty() -> {
-                                val key = environment.getProperty("app.turing.key")
-                                val info = message.text
-                                val userid = botUsername
-                                val loc: String? = null
-                                val response = turingClient.chat(key, info, userid, loc)
-                                sm.text = response!!.text
-                            }
-                        }
+                        sm.text = response!!.text
                         try {
                             sendMessage(sm)
                         } catch (e: TelegramApiException) {
