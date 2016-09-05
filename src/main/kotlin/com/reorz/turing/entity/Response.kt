@@ -20,6 +20,12 @@ data class Message(
         val icon: String?,
         val name: String?,
         val info: String?,
-        val song: String?,
         val detailurl: String?
 )
+
+enum class MessageCode(val code: String) {
+    TEXT("100000"),
+    LINK("200000"),
+    NEWS("302000"),
+    RECIPE("308000")
+}

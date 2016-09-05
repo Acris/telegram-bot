@@ -1,13 +1,13 @@
 package com.reorz.handler
 
 import com.reorz.turing.client.TuringClient
+import com.reorz.turing.entity.MessageCode
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.TelegramApiException
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
-import org.telegram.telegrambots.api.objects.MessageEntity
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.logging.BotLogger
@@ -87,17 +87,57 @@ class MessageHandler : TelegramLongPollingBot() {
                     else -> {
                         val key = environment.getProperty("app.turing.key")
                         val info = message.text
-                        val userid = botUsername
+                        val userid = message.chatId.toString()
                         val loc: String? = null
                         val response = turingClient.chat(key, info, userid, loc)
 
                         val sm = SendMessage()
                         sm.chatId = message.chatId.toString()
-                        sm.text = response!!.text
+                        sm.replyToMessageId = message.messageId
+
+                        val code = response!!.code
+                        when (code) {
+                            MessageCode.TEXT.code -> {
+                                sm.text = response.text
+                            }
+                            MessageCode.LINK.code -> {
+                                sm.text = response.text
+                                sm.text += "\n"
+                                sm.text += "\n 链接：${response.url}"
+                            }
+                            MessageCode.NEWS.code -> {
+                                sm.text = response.text
+                                sm.text += "\n"
+                                val list = response.list
+                                list?.forEach {
+                                    print(it)
+                                    sm.text += "\n 标题：${it.article}"
+                                    sm.text += "\n 来源：${it.source}"
+                                    sm.text += "\n 详情：${it.detailurl}"
+                                    sm.text += "\n "
+                                }
+                            }
+                            MessageCode.RECIPE.code -> {
+                                sm.text = response.text
+                                sm.text += "\n"
+                                val list = response.list
+                                list?.forEach {
+                                    sm.text += "\n 菜名：${it.name}"
+                                    sm.text += "\n 信息：${it.info}"
+                                    sm.text += "\n 详情：${it.detailurl}"
+                                    sm.text += "\n "
+                                }
+                            }
+                            else -> {
+                                sm.text = response.text
+                                BotLogger.info(LOGTAG, "Unmatched message code.")
+                            }
+                        }
+
                         try {
                             sendMessage(sm)
                         } catch (e: TelegramApiException) {
-                            BotLogger.error(LOGTAG, "Send message error.")
+                            BotLogger.error(LOGTAG, "Send message error.", e)
                         }
                     }
                 }
