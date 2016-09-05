@@ -37,14 +37,17 @@ class MessageHandler : TelegramLongPollingBot() {
             update.hasMessage() -> {
                 val message = update.message
                 when {
-                // user message
+                    // user message
                     message.isUserMessage -> handleUserMessage(message)
-                // group message
+                    // group message
                     message.isGroupMessage -> handleGroupMessage(message)
-                // super group message
+                    // super group message
                     message.isSuperGroupMessage -> handleSuperGroupMessage(message)
-                // channel message
+                    // channel message
                     message.isChannelMessage -> handleChannelMessage(message)
+                    else -> {
+                        BotLogger.info(LOGTAG, "Unknown message type.")
+                    }
                 }
             }
             update.hasEditedMessage() -> {
