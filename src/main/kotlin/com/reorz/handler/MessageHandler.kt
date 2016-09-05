@@ -93,7 +93,6 @@ class MessageHandler : TelegramLongPollingBot() {
 
                         val sm = SendMessage()
                         sm.chatId = message.chatId.toString()
-                        sm.replyToMessageId = message.messageId
 
                         val code = response!!.code
                         when (code) {
