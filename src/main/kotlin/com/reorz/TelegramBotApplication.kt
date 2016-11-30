@@ -7,10 +7,11 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.scheduling.annotation.EnableScheduling
-import org.telegram.telegrambots.TelegramApiException
+import org.telegram.telegrambots.ApiContextInitializer
 import org.telegram.telegrambots.TelegramBotsApi
+import org.telegram.telegrambots.exceptions.TelegramApiException
+import org.telegram.telegrambots.generics.BotSession
 import org.telegram.telegrambots.logging.BotLogger
-import org.telegram.telegrambots.updatesreceivers.BotSession
 import javax.annotation.PostConstruct
 import javax.annotation.PreDestroy
 
@@ -24,6 +25,7 @@ open class TelegramBotApplication {
         val LOGTAG: String = TelegramBotApplication::class.java.name
 
         @JvmStatic fun main(args: Array<String>) {
+            ApiContextInitializer.init()
             SpringApplication.run(TelegramBotApplication::class.java, *args)
         }
     }
